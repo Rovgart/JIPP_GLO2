@@ -6,6 +6,8 @@ def optymalizuj_kursy(wagi_paczek, max_waga):
     aktualna_waga = 0
 
     for paczka in wagi_paczek:
+        if paczka > max_waga:
+            raise ValueError("Paczka jest zbyt duza")
         if aktualna_waga + paczka <= max_waga:
             aktualny_kurs.append(paczka)
             aktualna_waga += paczka
@@ -14,15 +16,14 @@ def optymalizuj_kursy(wagi_paczek, max_waga):
             aktualny_kurs = [paczka]
             aktualna_waga = paczka
     
-    # Dodajemy ostatni kurs, jeśli nie jest pusty
     if aktualny_kurs:
         kursy.append(aktualny_kurs)
     
     return len(kursy), kursy
 
-# Przykładowe użycie
-wagi_paczek = [10, 5, 8, 3, 7, 2, 4, 6]
-max_waga = 15
+
+wagi_paczek = [18,30,18]
+max_waga = 25
 
 liczba_kursow, podzial_na_kursy = optymalizuj_kursy(wagi_paczek, max_waga)
 
